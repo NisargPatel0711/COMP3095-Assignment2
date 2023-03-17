@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="registered/index::head-part"></div>
+    <div th:replace="header :: myheader"></div>
+    <style>
+        .fa-shopping-cart {
+            color: #FFF
+        }
+
+        #cart-btn {
+            margin-right: 15px;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <title>View Cart</title>
+</head>
+<body class="text-center">
+<form th:action="@{/registered/download-shopping-list}" method="post" class="text-right mt-4">
+    <button class="btn btn-lg btn-dark" type="submit" th:text="'Download Shopping List As CSV'"></button>
+</form>
+<h1 class="mt-2">Shopping List</h1>
+<div class="container p-4 mt-2" th:if="${count2 &gt; 0}">
+    <table class="table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Item</th>
+            <th>For</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart, cartStat :${cart}">
+            <td th:text="${cartStat.count}"></td>
+            <td th:text="${cart.ingredient.item}"></td>
+            <td th:text="${cart.ingredient.recipe.recipeName}"></td>
+            <td>
+                <form th:action="@{/registered/delete-cart(cartId=${cart.id})}" method="post">
+                    <button class="btn btn-dark" type="submit" th:text="'Remove Item'"></button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="container p-5 -mt-3" th:if="${count2}==0">
+    <h4 th:text="${message2}"></h4>
+</div>
+<br>
+<h1>Planned meals for shopping list items</h1>
+<div th:replace="/registered/plan-meal.html::plan-table">
+</div>
+
+</body>
+</html>

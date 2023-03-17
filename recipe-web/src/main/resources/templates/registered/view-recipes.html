@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="registered/index::head-part"></div>
+    <div th:replace="header :: myheader"></div>
+    <style>
+        .fa-shopping-cart {
+            color: #FFF
+        }
+
+        #cart-btn {
+            margin-right: 15px;
+        }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <title>View Recipes</title>
+</head>
+<body class="text-center">
+<br>
+<h1>View Recipes</h1>
+<div th:replace="/registered/fragment.html::recipe_table">
+</div>
+
+</body>
+</html>
